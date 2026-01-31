@@ -40,4 +40,16 @@ if menu == "📊 کسٹمر ڈیش بورڈ":
 elif menu == "🔐 ایڈمن پینل":
     st.header("⚙️ ایڈمن کنٹرول")
     if st.sidebar.text_input("پاس ورڈ", type="password") == "admin786":
-        st.write("ایڈمن لاگ ان کامیاب!")
+       with tab4:
+    st.subheader("📄 بجلی کا بل اپلوڈ کریں")
+    uploaded_file = st.file_uploader("اپنے حالیہ بل کی تصویر منتخب کریں", type=['jpg', 'png', 'jpeg'])
+    
+    if uploaded_file is not None:
+        # فائل کو محفوظ کرنے کا طریقہ
+        file_path = os.path.join(UPLOAD_DIR, f"bill_{c_id}_{datetime.now().strftime('%Y%m%d')}.jpg")
+        with open(file_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        
+        st.success("آپ کا بل کامیابی سے اپلوڈ ہو گیا ہے! ایڈمن جلد اس کی تصدیق کر دے گا۔")
+        st.image(uploaded_file, caption="آپ کا اپلوڈ کردہ بل", use_container_width=True)
+ st.write("ایڈمن لاگ ان کامیاب!")
